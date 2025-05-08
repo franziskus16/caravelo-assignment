@@ -1,133 +1,108 @@
-# Caravelo Front-end assignment
+# Caravelo Front-end Assignment
 
-You are required to implement the scenarios included in this readme in this multi-tenant application.
+Este repositorio contiene la implementación del assignment técnico proporcionado por Caravelo para una aplicación multi-tenant basada en Vue 3 + Vite.
 
-## How the Application Works
+## 🧠 Descripción general
 
-In order to understand how this project works and give more context, please read the following information.
+Se ha implementado la arquitectura requerida para soportar múltiples tenants con distintos niveles de personalización, siguiendo las instrucciones del README original proporcionado.
 
-### Architecture Overview
+Este proyecto contiene la personalización para el tenant **Jetsmart (ja)**, con cambios visuales y estructurales en la vista de suscripciones.
 
-This application implements a multi-tenant architecture where a single codebase can serve multiple tenants (clients) with different levels of customization. The application is structured into two main parts:
+---
 
-1. **Core (Default) Implementation**
+## 🚀 Cómo ejecutar el proyecto
 
-   - Located in the `/src/core` directory
-   - Contains all default modules, components, views, services, store, and styles
-   - Represents the base application that runs when no specific tenant is specified
+### 🔧 Requisitos
 
-2. **Tenant-Specific Customizations**
-   - Located in `/src/tenants/<tenant-id>` directories
-   - Can override or extend any part of the core implementation
-   - Only includes the files that differ from the core implementation
+- Node.js 18+
+- npm
 
-### Dynamic Loading System
+### 💻 Ejecutar en modo desarrollo:
 
-The application uses a dynamic loading system that determines which components, views, and styles to load based on the current tenant:
+```bash
+# Instalar dependencias
+npm install
 
-1. **Component/View Loading (`loaderHelper.ts`)**
+# Ejecutar la versión base
+npm run dev
 
-   - When a component or view is requested, the system first checks if a tenant-specific version exists
-   - If found, the tenant version is loaded
-   - If not found, it falls back to the core implementation
-   - This is handled transparently through Vue's dynamic component system
-   - You can have a look to `Subscription.view.vue` to understand how components/view should be loaded
+# Ejecutar la versión Jetsmart (tenant 'ja')
+npm run dev:ja
+```
 
-2. **Theme Loading (`themeLoader.ts`)**
-   - Similar to components, themes can be customized per tenant
-   - The system attempts to load tenant-specific styles first
-   - Falls back to default theme if no tenant-specific theme is found
+---
 
-### Running the Application
+## 🏗️ Estructura del proyecto
 
-- **Default Mode**: `npm run dev`
+```plaintext
+vue-app/
+├── src/
+│   ├── core/
+│   │   ├── components/
+│   │   ├── modules/
+│   │   └── styles/
+│   ├── tenants/
+│   │   └── ja/
+│   │       ├── components/
+│   │       │   ├── Hero.vue
+│   │       │   └── UserCard.vue
+│   │       └── views/
+│   │           └── Subscription.view.vue
+├── test/
+│   └── UserCard.test.ts
+├── vite.config.ts
+└── ...
+```
 
-  - Runs the application with core implementation
-  - No tenant-specific overrides are applied
+---
 
-- **Tenant Mode**: `npm run dev:<tenant-id>`
-  - Runs the application for a specific tenant (e.g., `npm run dev:va` for Veloair)
-  - Automatically loads tenant-specific overrides
-  - Falls back to core implementation for non-overridden parts
+## 🧪 Testing
 
-### Customization Levels
+Se ha añadido configuración para test unitarios con [Vitest](https://vitest.dev/).
 
-Tenants can customize the application at various levels:
+### Ejecutar tests:
 
-1. **Theme Only**
+```bash
+npm run test
+```
 
-   - Simplest customization
-   - Only requires overriding theme variables
+Se ha implementado un test básico para el componente `UserCard`.
 
-2. **Component Override**
+---
 
-   - Override specific component layouts while keeping core business logic
+## 🎨 Personalizaciones del tenant Jetsmart (ja)
 
-3. **View Override**
+- ✅ Componente personalizado **Hero.vue**
+- ✅ Vista `SubscriptionView.vue` personalizada para incluir el Hero y reordenar elementos
+- ✅ Estilos custom para `UserCard` y `SubscriptionCard`
+- ✅ Añadidos valores de **tema** específicos del tenant
+- ✅ Loader dinámico con fallback al core funcionando correctamente
+- ✅ Test unitario básico funcionando (`UserCard.test.ts`)
 
-   - Customize entire page layouts
-   - Can include tenant-specific components
+---
 
-4. **Full Feature Extension**
-   - Add completely new features specific to a tenant
-   - Extends core modules and adds new services/stores
+## 📋 Notas y consideraciones
 
-## Scenarios
+- Se sigue la arquitectura del proyecto utilizando `loaderHelper.ts` para cargar dinámicamente vistas y componentes del tenant.
+- Se intento hacer todo desde la misma `Subscription.view.vue` para mostrar el `Hero` pero luego se decidio cambiar la ubicación para su carga fuera solo a partir del tenant propio de JetSmart.
+- El componente `Hero.vue` se renderiza solo para Jetsmart y se ubica sobre los componentes de tarjeta (`SubscriptionCard` y `UserCard`).
+- Se ha aplicado `max-width` a los componentes de contenido para que el `Hero` ocupe ancho completo y el resto se centre.
+- La funcionalidad de negocio no fue alterada; solo se han hecho personalizaciones visuales y de layout.
+- Los valores del tema en el core se sobreescribieron desde la carpeta del tenant para mostrar solo el contenido especifico para JetSmart (ja).
+- Se ha buscado detallar al maximo los estilos del tenant añadiendo variables nuevas al tenant siguiendo toda la información que nos mostraba el figma y apoyandome en el site de [JetSmartGo](https://go.jetsmart.com/en-us/ja/subscriptions). para algunos textos y estilos.
+- La prueba se ha realizado en un total de entre 6 y 7 horas.
 
-Please, implement the following scenarios for each tenant. Have a look to the existing example in `va`.
+---
 
-When creating a new tenant, make sure you follow the same directory structure that is used in `core`.
+## 📤 Envío
 
-The scripts to run these tenants are already created for your convinience (you can have a look to the `package.json` and `config/tenants.js`).
+El repositorio ha sido compartido con:
 
-Open the [figma file](https://www.figma.com/design/SQ5YdH1u7qEDzBNAt38hNN/Tech-Assignment?node-id=2207-111&p=f&t=TKQNoPWykDZGqLen-0) to follow the designs.
+- `tech-assignment@caravelo.com`
+- `jlv@caravelo.com`
 
-### VA - Veloair (this scenario is already created to be used as example)
+---
 
-#### Scenario
+## :bust_in_silhouette: Autor
 
-The tenant wants the application to be the same as our base application but with a different theme
-
-#### Requirements
-
-- Add theme values
-
-### FM - Flymere
-
-#### Scenario
-
-The tenant asks for a component with a different layout but it has the same behavoiur of our base component (UserCard)
-
-#### Requirements
-
-- Create a custom component UserCard that overrides the default one, it must reuse the common business logic (UserModule)
-- Add custom styles for the custom UserCard component
-- Adds theme values
-
-### AT - Aertis
-
-#### Scenario
-
-The tenant asks for a layout different than our base application and wants a component that we don't have on our base application (Hero)
-
-#### Requirements
-
-- Create a custom component Hero
-- Create the custom view that reorders the elements and adds the custom component to the view
-- Add custom styles on top of the defaults for UserCard and SubscriptionCard
-- Add theme values
-
-### SV - Skyver
-
-#### Scenario
-
-The tenant asks for a feature we don't have, you will need to develop it only for this tenant extending our current base application. The feature requested is to display milleage and points in the user card.
-This information will be provided by them.
-
-#### Requirements
-
-- Create a custom component UserCard that overrides the default one, a new custom module for this tenant will be needed.
-- Create a custom UserModule that extends from the base UserModule (using dependency injection to avoid coupling)
-- Create a custom Service (Milleage) to retrieve the information
-- Create a custom store to handle the milleage information
-- Add the theme values
+- Francesc Gimenez Gil
