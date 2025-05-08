@@ -1,0 +1,39 @@
+{
+  "name": "vue-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/build.js",
+    "dev:va": "VITE_TENANT=va VITE_THEME=veloair vite",
+    "build:va": "node scripts/build.js va",
+    "dev:fm": "VITE_TENANT=fm VITE_THEME=flymere vite",
+    "build:fm": "node scripts/build.js fm",
+    "dev:ja": "VITE_TENANT=ja VITE_THEME=jetsmart vite",
+    "build:ja": "node scripts/build.js ja",
+    "dev:at": "VITE_TENANT=at VITE_THEME=aertis vite",
+    "build:at": "node scripts/build.js at",
+    "dev:sv": "VITE_TENANT=sv VITE_THEME=skyver vite",
+    "build:sv": "node scripts/build.js sv",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "pinia": "^3.0.1",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.5",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/test-utils": "^2.4.6",
+    "@vue/tsconfig": "^0.7.0",
+    "jsdom": "^26.1.0",
+    "sass-embedded": "^1.85.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.1.0",
+    "vitest": "^3.1.3",
+    "vue-tsc": "^2.2.0"
+  }
+}

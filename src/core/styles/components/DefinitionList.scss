@@ -1,0 +1,10 @@
+.DefinitionList {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  margin: 0;
+  gap: 8px;
+
+  dt {
+    font-weight: 600;
+  }
+}
