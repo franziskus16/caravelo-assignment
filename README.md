@@ -90,6 +90,7 @@ Se ha implementado un test básico para el componente `UserCard`.
 - La funcionalidad de negocio no fue alterada; solo se han hecho personalizaciones visuales y de layout.
 - Los valores del tema en el core se sobreescribieron desde la carpeta del tenant para mostrar solo el contenido especifico para JetSmart (ja).
 - Se ha buscado detallar al maximo los estilos del tenant añadiendo variables nuevas al tenant siguiendo toda la información que nos mostraba el figma y apoyandome en el site de [JetSmartGo](https://go.jetsmart.com/en-us/ja/subscriptions). para algunos textos y estilos.
+- Se ha testeado que muestre el cambio entre diferentes tenants, primero cargando con npm dev:va para visualizar los estilos propios de Veloair (va) y luego con el propio que he preparado de JetSmart (ja) para que mostrara el contenido nuevo solo para este tenant.
 - La prueba se ha realizado en un total de entre 6 y 7 horas.
 
 ---
